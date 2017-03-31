@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Your favorite music you haven't heard yet." />
+
+	<title>Proximity Player</title>
+
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arimo:400,700,400italic">
+	<link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css">
+	<link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/css/xenon-core.css">
+	<link rel="stylesheet" href="assets/css/xenon-forms.css">
+	<link rel="stylesheet" href="assets/css/xenon-components.css">
+	<link rel="stylesheet" href="assets/css/xenon-skins.css">
+	<link rel="stylesheet" href="assets/css/custom.css">
+
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+
+</head>
+<body class="page-body">
+	<div class="page-container">
+		<div class="sidebar-menu toggle-others fixed">
+			<div class="sidebar-menu-inner">
+				<header class="logo-env">
+					<div class="logo">
+						<a href="#" class="logo-expanded">
+							<img src="assets/images/logo.png" width="200" alt="" />
+						</a>
+						<a href="#all" class="logo-collapsed">
+							<img src="assets/images/logo-sm.png" width="40" alt="" />
+						</a>
+					</div>
+					<div class="mobile-menu-toggle visible-xs">
+						<a href="#" data-toggle="mobile-menu">
+							<i class="fa-bars"></i>
+						</a>
+					</div>
+				</header>
+				<div class="embed-responsive embed-responsive-16by9 hide">
+  				<div id="player"></div>
+				</div>
+				<ul id="main-menu" class="main-menu auto-inherit-active-class">
+					<li>
+						<a href="#all">
+							<i class="fa fa-music"></i>
+							<span class="title">All Music</span>
+						</a>
+					</li>
+					<li>
+						<a href="#free">
+							<i class="fa fa-download"></i>
+							<span class="title">Free Download</span>
+						</a>
+					</li>
+					<li>
+						<a href="#exclusive">
+							<i class="fa fa-certificate"></i>
+							<span class="title">Proximity Exclusive</span>
+						</a>
+					</li>
+					<li>
+						<a href="#edm">
+							<i class="fa fa-certificate"></i>
+							<span class="title">Electronic Dance</span>
+						</a>
+					</li>
+					<br />
+					<li>
+						<a href="https://www.facebook.com/Proximity" target="_blank">
+							<i class="fa fa-facebook"></i>
+							<span class="title">Facebook</span>
+						</a>
+					</li>
+					<li>
+						<a href="https://twitter.com/PandMusic" target="_blank">
+							<i class="fa fa-twitter"></i>
+							<span class="title">Twitter</span>
+						</a>
+					</li>
+					<li>
+						<a href="https://www.youtube.com/user/PandoraMuslc" target="_blank">
+							<i class="fa fa-youtube"></i>
+							<span class="title">YouTube</span>
+						</a>
+					</li>
+					<li>
+						<a href="http://pandoric.spreadshirt.com/" target="_blank">
+							<i class="fa fa-dollar"></i>
+							<span class="title">Merch</span>
+						</a>
+					</li>
+				</ul>
+				<div class="xe-widget xe-status-update hidden-sm hidden-xs" id="twitter">
+					<div class="xe-header">
+						<div class="xe-icon">
+							<i class="fa-twitter"></i>
+						</div>
+						<div class="xe-nav">
+							<a href="#" class="xe-prev">
+								<i class="fa-angle-left"></i>
+							</a>
+							<a href="#" class="xe-next">
+								<i class="fa-angle-right"></i>
+							</a>
+						</div>
+					</div>
+					<div class="xe-body">
+						<ul class="list-unstyled">
+
+							<li class="active">
+								<span class="status-date"></span>
+								<p>This project was left incomplete. Completion may take place if this project is requested for use.</p>
+							</li>
+							<li>
+								<span class="status-date"></span>
+								<p>This project is not official and is not associated with Proximity.</p>
+							</li>
+						</ul>
+					</div>
+					<div class="xe-footer">
+						<a href="#">
+							<i class="fa-retweet"></i>
+							Retweet
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main-content">
+
+			<h3 class="text-gray">
+				<span id="typename">Loading...</span> <br />
+				<small class="hide" id="nocategory">No music fitting this category have been loaded into your catalog yet. We'll keep loading more from the server until we come across one in this category.</small>
+				<small class="hide" id="nonew">Loading is taking longer as we are looking further back to find more music fitting this category as any more than the ones listed here were not recently added.</small>
+			</h3>
+
+			<div class="row" id="songlist"></div>
+			<div class="row text-center" id="newpart">
+				<div class="load-more">Load more</div>
+				<h1><i class="fa fa-spin fa-spinner"></i></h1>
+			</div>
+
+
+<style>
+.sidebar-menu.collapsed #twitter {
+	display: none;
+}
+#twitter {
+	bottom: -100px;
+	margin: 0;
+	padding: 30px;
+	position: absolute;
+	transition: bottom 0.5s, padding 0.5s;
+}
+#twitter:hover {
+	bottom: 0;
+	padding: 50px 30px;
+}
+.load-more {
+	border: 3px solid black;
+	border-radius: 50%;
+	cursor: pointer;
+	height: 125px;
+	margin: 0 auto;
+	padding: 50px 0 0;
+	text-transform: uppercase;
+	width: 125px;
+}
+.load-more:hover {
+	border-color: #3B5998;
+}
+#newpart:not(.loading) h1 {display:none;}
+#newpart.loading .load-more {display:none;}
+.mobile-menu-toggle {margin-top: 5px;}
+</style>
+
+			<footer class="main-footer sticky footer-type-1">
+				<div class="footer-inner">
+					<div class="footer-text">
+						&copy; 2015
+						<strong>Proximity</strong>
+					</div>
+					<div class="go-up">
+						<a href="#" rel="go-top">
+							<i class="fa-angle-up"></i>
+						</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script type="text/html" id="songitem-template">
+	<div class="col-sm-6 col-md-3">
+		<span class="hide" data-name="data.id">{{id}}</span>
+		<span class="hide" data-name="data.tags">|all|{{lower:tags.line}}|</span>
+		<span class="hide" data-name="data.title">{{lower:title}}</span>
+		<div class="xe-widget xe-single-news">
+			<div class="xe-image">
+				<img src="//img.youtube.com/vi/{{vid}}/mqdefault.jpg" class="img-responsive" />
+				<span class="xe-gradient" style="cursor:pointer;" onclick="return playSong('{{vid}}');"></span>
+			</div>
+			<div class="xe-details">
+				<div class="category"><a>{{tags.text}}</a></div>
+				<h3><a href="#" onclick="return playSong('{{vid}}');">{{title}}</a></h3>
+				<time><span onclick="downloadSong('{{vid}}')" data-if="tags.free" style="cursor:pointer;"><i class="fa fa-download"></i> Download</span></time>
+			</div>
+		</div>
+	</div>
+	</script>
+	<script type="text/html" id="disclaimermodal-template">
+		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Free to Download Disclaimer</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>This song is offered free-to-download by Proximity. The song is permitted for personal use only and may not be used for commercial gain.</p>
+						<p>If you wish to proceed, you will be taken to <em>http://convert2mp3.net/</em> to download this song. We are in no way associated with, nor endorsed, nor do we endorse, convert2mp3.net. We may not be held responsible with the contents of convert2mp3.net.</p>
+						<strong>Do you wish to proceed to convert2mp3.net to download this song?</strong>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <a href="{{link}}" target="_blank" class="btn btn-primary">Proceed</a>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/TweenMax.min.js"></script>
+	<script src="assets/js/resizeable.js"></script>
+	<script src="assets/js/joinable.js"></script>
+	<script src="assets/js/xenon-api.js"></script>
+	<script src="assets/js/xenon-toggles.js"></script>
+	<script src="assets/js/xenon-widgets.js"></script>
+	<script src="assets/js/xenon-custom.js"></script>
+</body>
+</html>
